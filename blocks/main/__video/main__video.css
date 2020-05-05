@@ -1,0 +1,6 @@
+.main__video {
+    border: 1px solid grey;
+    background-color: lightsalmon;
+    width: 640px;
+    height: 480px;
+}

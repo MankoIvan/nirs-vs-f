@@ -1,0 +1,14 @@
+@import url("./__title/header__title.css");
+@import url("./__items/header__items.css");
+@import url("./__item/header__item.css");
+@import url("./__item-image/header__item-image.css");
+@import url("./__item-text/header__item-text.css");
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 80px;
+    padding: 5px;
+    box-shadow: grey 0 10px 5px;
+}

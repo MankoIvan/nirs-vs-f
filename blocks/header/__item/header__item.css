@@ -1,0 +1,14 @@
+.header__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 80px;
+    width: 80px;
+    background-color: lightsalmon;
+    transition: background-color .2s linear;
+}
+.header__item:hover {
+    background-color: salmon;
+}

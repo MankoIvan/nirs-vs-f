@@ -1,0 +1,10 @@
+.header__item-image {
+    height: 32px;
+    width: 32px;
+    transform: translate(0, -20%);
+    transition: height .2s linear, width .2s linear;
+}
+.header__item:hover .header__item-image {
+    height: 40px;
+    width: 40px;
+}

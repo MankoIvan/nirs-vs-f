@@ -1,28 +1,45 @@
+
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>
-      HTML Webcam Capture Demo
-    </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <style>
-      #vid-show, #vid-canvas, #vid-take {
-        display: block;
-        margin-bottom: 20px;
-      }
-      html, body {
-        padding: 0;
-        margin: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="vid-controls">
-      <video id="vid-show" autoplay></video>
-      <input id="vid-take" type="button" value="Take Photo"/>
-      <div id="vid-canvas"></div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    <script src="1-basics.js"></script>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <section class="header">
+        <h1 class="header__title">Smart home</h1>
+        <div class="header__items">
+            <div class="header__item">
+                <img src="./images/home.png" alt="" class="header__item-image">
+                <p class="header__item-text">Home</p>
+            </div>
+            <div class="header__item">
+                <img src="./images/temperature.png" alt="" class="header__item-image">
+                <p class="header__item-text">Temperature</p>
+            </div>
+            <div class="header__item">
+                <img src="./images/lights.png" alt="" class="header__item-image">
+                <p class="header__item-text">Lights</p>
+            </div>
+            <div class="header__item">
+                <img src="./images/cctv.png" alt="" class="header__item-image">
+                <p class="header__item-text">CCTV</p>
+            </div>
+            <div class="header__item">
+                <img src="./images/atmosphere.png" alt="" class="header__item-image">
+                <p class="header__item-text">Atmosphere</p>
+            </div>
+        </div>
+    </section>
+    <section class="main">
+        <image id="firebase-video" class="main__video"></image>
+    </section>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-database.js"></script>
+
+    <script src="index.js"></script>
+</body>
 </html>

@@ -1,0 +1,6 @@
+.header__items {
+    display: flex;
+    width: 480px;
+    justify-content: space-between;
+    align-items: center;
+}
