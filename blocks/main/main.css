@@ -1,7 +1,8 @@
 @import url("./__video/main__video.css");
 .main {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding-top: 64px;
+    width: 1440px;
 }

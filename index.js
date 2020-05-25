@@ -1,6 +1,8 @@
-const firebaseVideo = document.getElementById("firebase-video");
+const ipCam1 = document.getElementById("ip-cam-1");
+const led1 = document.getElementById("cam-led-1");
+const ipCam2 = document.getElementById("ip-cam-2");
+const led2 = document.getElementById("cam-led-2");
 
-// Your web app's Firebase configuration
 var firebaseConfig = {
   apiKey: "AIzaSyDK9B9NCjSwJJL2ryiy7USK1XRIOzKoh5M",
   authDomain: "nirs-camera.firebaseapp.com",
@@ -11,23 +13,23 @@ var firebaseConfig = {
   appId: "1:382258061836:web:bab2a86d0a88a57cc5c429",
   measurementId: "G-VNNLQ9Y1NN"
 };
-// Initialize Firebase
+
 firebase.initializeApp(firebaseConfig);
 
-var database = firebase.database();
-function writeImageData(imageId, data) {
-    firebase.database().ref('image/' + imageId).set({
-        data: data
-    });
-}
-function writeUserData(userId, name, email) {
-    firebase.database().ref('users/' + userId).set({
-      username: name,
-      email: email
-    });
-}
-const updateImageSubscription = firebase.database().ref('image/' + "currentImage" + '/data');
-updateImageSubscription.on('value', function(data) {
-    firebaseVideo.src = data.node_.value_;
-    //console.log(data.node_.value_);
+const updateImageSubscription1 = firebase.database().ref('image/ipcam1/data');
+updateImageSubscription1.on('value', function(data) {
+  ipCam1.src = data.node_.value_;
+  led1.classList.add("camera__led_on");
+  setTimeout(()=>{
+    led1.classList.remove("camera__led_on");
+  },100)
 });
+const updateImageSubscription2 = firebase.database().ref('image/ipcam2/data');
+updateImageSubscription2.on('value', function(data) {
+  ipCam2.src = data.node_.value_;
+  led2.classList.add("camera__led_on");
+  setTimeout(()=>{
+    led2.classList.remove("camera__led_on");
+  },100)
+});
+console.log("hello")
