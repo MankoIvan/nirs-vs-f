@@ -1,0 +1,9 @@
+@import url("./_on/camera__led_on.css");
+.camera__led {
+    width: 25px;
+    height: 25px;
+    border: 1px solid grey;
+    background-color: white;
+    border-radius: 50%;
+    margin: 10px;
+}
