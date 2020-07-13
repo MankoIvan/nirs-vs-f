@@ -2,6 +2,9 @@ const ipCam1 = document.getElementById("ip-cam-1");
 const led1 = document.getElementById("cam-led-1");
 const ipCam2 = document.getElementById("ip-cam-2");
 const led2 = document.getElementById("cam-led-2");
+const switchButton = document.getElementById("switch-button");
+const cameraNumberField = document.getElementById("camera-number");
+
 
 var firebaseConfig = {
   apiKey: "AIzaSyDK9B9NCjSwJJL2ryiy7USK1XRIOzKoh5M",
@@ -16,20 +19,41 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-const updateImageSubscription1 = firebase.database().ref('image/ipcam1/data');
-updateImageSubscription1.on('value', function(data) {
+const database = firebase.database();
+const cameranumber = database.ref('image/ipcamnum');
+const image1 = database.ref('image/1before')
+const image2 = database.ref('image/1after')
+
+
+image1.on('value', function(data) {
   ipCam1.src = data.node_.value_;
   led1.classList.add("camera__led_on");
   setTimeout(()=>{
     led1.classList.remove("camera__led_on");
   },100)
 });
-const updateImageSubscription2 = firebase.database().ref('image/ipcam2/data');
-updateImageSubscription2.on('value', function(data) {
+
+image2.on('value', function(data) {
   ipCam2.src = data.node_.value_;
   led2.classList.add("camera__led_on");
   setTimeout(()=>{
     led2.classList.remove("camera__led_on");
   },100)
 });
-console.log("hello")
+
+console.log("hello");
+function identifyDefaultCamera() {
+  cameranumber.once('value').then(function(val) {  
+    cameraNumberField.innerText = "№" + Number(val.node_.value_.substr(5));
+  });
+}
+identifyDefaultCamera()
+
+
+switchButton.addEventListener('click', () => {
+  cameranumber.once('value').then(function(val) {
+    let newValue = Number(val.node_.value_.substr(5)) % 2 + 1;    
+    cameraNumberField.innerText = "№" + newValue;
+    cameranumber.set("ipcam" + newValue);
+  });
+});

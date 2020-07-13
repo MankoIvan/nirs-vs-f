@@ -1,8 +1,9 @@
 @import url("./__video/main__video.css");
+@import url("./__camera-block/main__camera-block.css");
+@import url("./__switch-button/main__switch-button.css");
+@import url("./__description/main__description.css");
+@import url("./__camera-number/main__camera-number.css");
 .main {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 64px;
+    padding: 64px 0;
     width: 1440px;
 }
