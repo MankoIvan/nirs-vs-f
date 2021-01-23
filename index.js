@@ -2,6 +2,12 @@ const ipCam1 = document.getElementById("ip-cam-1");
 const led1 = document.getElementById("cam-led-1");
 const ipCam2 = document.getElementById("ip-cam-2");
 const led2 = document.getElementById("cam-led-2");
+
+buttonLeft = document.getElementById("turn-left");
+buttonUp = document.getElementById("turn-up");
+buttonRight = document.getElementById("turn-right");
+buttonDown = document.getElementById("turn-down");
+
 const switchButton = document.getElementById("switch-button");
 const cameraNumberField = document.getElementById("camera-number");
 
@@ -21,8 +27,8 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 const cameranumber = database.ref('image/ipcamnum');
-const image1 = database.ref('image/1before')
-const image2 = database.ref('image/1after')
+const image1 = database.ref('image/ipcam-new/data');
+const image2 = database.ref('image/ipcam2');
 
 
 image1.on('value', function(data) {
@@ -56,4 +62,55 @@ switchButton.addEventListener('click', () => {
     cameraNumberField.innerText = "№" + newValue;
     cameranumber.set("ipcam" + newValue);
   });
+});
+function setCamAngle(direction, angle) { //direction true is vertical, false is horizontal
+  let directionValue = ""
+  if (direction) {
+    directionValue = 'v-pos';
+  } else {
+    directionValue = 'h-pos';
+  }
+  firebase.database().ref(`image/${directionValue}`).once('value')
+    .then((data) => {
+      let curAngle = data.val().data;
+      let newAngle = curAngle + angle;
+      if (newAngle >= 0 && newAngle <= 180)
+      {
+        firebase.database().ref(`image/${directionValue}`).set({
+          data: newAngle
+        });
+      } else {
+        alert(`current camera angle ${curAngle} is too ${(angle > 0)?"high":"low"} already`)
+        console.log(`current camera angle ${curAngle} is too ${(angle > 0)?"high":"low"} already`);
+      }
+
+    });
+}
+buttonLeft.addEventListener("click", function() {
+  buttonLeft.disabled = true;
+  setCamAngle(false, 30);
+  setTimeout(() => {
+    buttonLeft.disabled = false;
+  }, 2000)
+});
+buttonUp.addEventListener("click", function() {
+  buttonUp.disabled = true;
+  setCamAngle(true, -30);
+  setTimeout(() => {
+    buttonUp.disabled = false;
+  }, 2000)
+});
+buttonRight.addEventListener("click", function() {
+  buttonRight.disabled = true;
+  setCamAngle(false, -30);
+  setTimeout(() => {
+    buttonRight.disabled = false;
+  }, 2000)
+});
+buttonDown.addEventListener("click", function() {
+  buttonDown.disabled = true;
+  setCamAngle(true, 30);
+  setTimeout(() => {
+    buttonDown.disabled = false;
+  }, 2000)
 });
